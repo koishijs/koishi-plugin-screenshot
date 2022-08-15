@@ -3,32 +3,6 @@ import { Context, Logger, noop, Schema, segment, Time } from 'koishi'
 import {} from 'koishi-plugin-puppeteer'
 import { PNG } from 'pngjs'
 
-// workaround puppeteer typings downgrade
-declare module 'puppeteer-core/lib/types' {
-  interface Base64ScreenshotOptions extends ScreenshotOptions {
-    encoding: 'base64'
-  }
-
-  interface BinaryScreenshotOptions extends ScreenshotOptions {
-    encoding?: 'binary'
-  }
-
-  interface Shooter {
-    screenshot(options?: Base64ScreenshotOptions): Promise<string>
-    screenshot(options?: BinaryScreenshotOptions): Promise<Buffer>
-  }
-
-  interface Page extends Shooter {
-    screenshot(options?: Base64ScreenshotOptions): Promise<string>
-    screenshot(options?: BinaryScreenshotOptions): Promise<Buffer>
-  }
-
-  interface ElementHandle extends Shooter {
-    screenshot(options?: Base64ScreenshotOptions): Promise<string>
-    screenshot(options?: BinaryScreenshotOptions): Promise<Buffer>
-  }
-}
-
 declare module 'koishi' {
   interface Events {
     'screenshot/validate'(url: string): string
